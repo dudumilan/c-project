@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Project</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #2E7D32;
+            color: rgb(255, 255, 255);
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #1565C0;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .banner {
+            background-color: #81C784;
+            color: rgb(255, 255, 255);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 280px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .mapa {
+            background: #ddd;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2E7D32;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background-color: #1B5E20;
+        }
+
+        footer {
+            background-color: #2E7D32;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .cards {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>E-Project</h1>
+</header>
+
+<nav>
+    <a href="#impacto">Impacto Ambiental</a>
+    <a href="#coleta">Pontos de Coleta</a>
+    <a href="#descarte">Como Descartar</a>
+    <a href="#curiosidades">Curiosidades</a>
+    <a href="#contato">Contato</a>
+</nav>
+
+<section class="banner">
+    <h2>O lixo eletrônico cresce a cada ano.</h2>
+    <p>Você sabe para onde vai o seu?</p>
+    <a href="#coleta" class="btn">Encontrar ponto de coleta</a>
+</section>
+
+<section id="impacto">
+    <h2>📊 Impacto Ambiental</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>🌍 Contaminação do Solo</h3>
+            <p>Metais pesados como chumbo e mercúrio contaminam a terra quando descartados incorretamente.</p>
+        </div>
+        <div class="card">
+            <h3>💧 Poluição da Água</h3>
+            <p>Substâncias tóxicas podem atingir rios e lençóis freáticos.</p>
+        </div>
+        <div class="card">
+            <h3>🌫️ Poluição do Ar</h3>
+            <p>A queima irregular de eletrônicos libera gases prejudiciais à saúde.</p>
+        </div>
+    </div>
+</section>
+
+<section id="coleta">
+    <h2>🗺️ Pontos de Coleta</h2>
+    <div class="mapa">
+        <p>🔎 Digite sua cidade para encontrar pontos de coleta.</p>
+        <input type="text" placeholder="Digite sua cidade">
+        <br><br>
+        <button class="btn">Buscar</button>
+    </div>
+</section>
+
+<section id="descarte">
+    <h2>♻️ Como Descartar Corretamente</h2>
+    <ul>
+        <li>Apague seus dados pessoais restaurando o aparelho.</li>
+        <li>Separe celulares, computadores e baterias.</li>
+        <li>Leve a um ponto de coleta autorizado.</li>
+        <li><strong>Não jogue no lixo comum.</strong></li>
+    </ul>
+</section>
+
+<section id="curiosidades">
+    <h2>🧠 Curiosidades sobre Reciclagem</h2>
+    <div class="cards">
+        <div class="card">
+            <p>📱 Um celular pode conter ouro e prata recicláveis.</p>
+        </div>
+        <div class="card">
+            <p>🔋 Baterias podem levar centenas de anos para se decompor.</p>
+        </div>
+        <div class="card">
+            <p>💻 Muitos componentes podem ser reutilizados.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Anhanguera | Projeto Educacional sobre Lixo Eletrônico</p>
+</footer>
+
+</body>
+</html>
