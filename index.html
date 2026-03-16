@@ -125,32 +125,43 @@
     <h2>📊 Impacto Ambiental</h2>
     <div class="cards">
         <div class="card">
-            <h3>🌍 Contaminação do Solo</h3>
+            <h3>Contaminação do Solo</h3>
             <p>Metais pesados como chumbo e mercúrio contaminam a terra quando descartados incorretamente.</p>
         </div>
         <div class="card">
-            <h3>💧 Poluição da Água</h3>
+            <h3>Poluição da Água</h3>
             <p>Substâncias tóxicas podem atingir rios e lençóis freáticos.</p>
         </div>
         <div class="card">
-            <h3>🌫️ Poluição do Ar</h3>
+            <h3>Poluição do Ar</h3>
             <p>A queima irregular de eletrônicos libera gases prejudiciais à saúde.</p>
         </div>
     </div>
 </section>
 
 <section id="coleta">
-    <h2>🗺️ Pontos de Coleta</h2>
+    <h2>Pontos de Coleta</h2>
     <div class="mapa">
-        <p>🔎 Digite sua cidade para encontrar pontos de coleta.</p>
-        <input type="text" placeholder="Digite sua cidade">
-        <br><br>
-        <button class="btn">Buscar</button>
-    </div>
+        <input id="cidade" type="text" placeholder="Digite sua cidade">
+    <div id="sugestoes"></div>
+
+<br><br>
+
+<button class="btn" onclick="buscarCidade()">Buscar</button>
+
+<br><br>
+
+<iframe 
+    id="mapa"
+        src="https://www.google.com/maps?q=reciclagem+eletronicos+sorocaba&output=embed"
+        width="100%" 
+        height="450" 
+        style="border:0;">
+</iframe>
 </section>
 
 <section id="descarte">
-    <h2>♻️ Como Descartar Corretamente</h2>
+    <h2>Como Descartar Corretamente</h2>
     <ul>
         <li>Apague seus dados pessoais restaurando o aparelho.</li>
         <li>Separe celulares, computadores e baterias.</li>
@@ -160,16 +171,16 @@
 </section>
 
 <section id="curiosidades">
-    <h2>🧠 Curiosidades sobre Reciclagem</h2>
+    <h2>Curiosidades sobre Reciclagem</h2>
     <div class="cards">
         <div class="card">
-            <p>📱 Um celular pode conter ouro e prata recicláveis.</p>
+            <p>Um celular pode conter ouro e prata recicláveis.</p>
         </div>
         <div class="card">
-            <p>🔋 Baterias podem levar centenas de anos para se decompor.</p>
+            <p>Baterias podem levar centenas de anos para se decompor.</p>
         </div>
         <div class="card">
-            <p>💻 Muitos componentes podem ser reutilizados.</p>
+            <p>Muitos componentes podem ser reutilizados.</p>
         </div>
     </div>
 </section>
@@ -177,6 +188,65 @@
 <footer>
     <p>© 2026 Anhanguera | Projeto Educacional sobre Lixo Eletrônico</p>
 </footer>
+<script>
 
+let cidades = [];
+
+fetch("https://servicodados.ibge.gov.br/api/v1/localidades/municipios")
+.then(res => res.json())
+.then(data => {
+
+    cidades = data.map(cidade => cidade.nome);
+
+});
+
+
+
+document.getElementById("cidade").addEventListener("input", function() {
+
+    let texto = this.value.toLowerCase();
+
+    let resultados = cidades.filter(function(cidade){
+        return cidade.toLowerCase().startsWith(texto);
+    });
+
+    let lista = document.getElementById("sugestoes");
+
+    lista.innerHTML = "";
+
+    resultados.slice(0,10).forEach(function(cidade){
+
+        let item = document.createElement("div");
+
+        item.textContent = cidade;
+
+        item.style.cursor = "pointer";
+        item.style.padding = "5px";
+        item.style.background = "#fff";
+        item.style.borderBottom = "1px solid #ccc";
+
+        item.onclick = function(){
+            document.getElementById("cidade").value = cidade;
+            lista.innerHTML = "";
+        };
+
+        lista.appendChild(item);
+
+    });
+
+});
+
+
+function buscarCidade() {
+
+    let cidade = document.getElementById("cidade").value;
+
+    let url = "https://www.google.com/maps?q=reciclagem+eletronicos+descarte+eletronicos+ecoponto+" + cidade + "&output=embed";
+
+    document.getElementById("mapa").src = url;
+
+}
+
+</script>
 </body>
 </html>
