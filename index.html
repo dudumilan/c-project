@@ -3,94 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Project</title>
+    <title>C-Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
             color: #333;
+            line-height: 1.6;
         }
 
         header {
-            background-color: #2E7D32;
-            color: rgb(255, 255, 255);
-            padding: 20px;
+            background: linear-gradient(135deg, #2E7D32 0%, #388E3C 100%);
+            color: white;
+            padding: 30px 20px;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>') no-repeat center;
+            background-size: cover;
+            opacity: 0.1;
         }
 
         nav {
-            background-color: #1565C0;
-            padding: 10px;
+            background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
+            padding: 15px;
             text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         nav a {
             color: white;
-            margin: 0 15px;
+            margin: 0 20px;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s ease;
+            position: relative;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: #BBDEFB;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #BBDEFB;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+            left: 0;
         }
 
         section {
-            padding: 40px 20px;
-            max-width: 1000px;
+            padding: 60px 20px;
+            max-width: 1200px;
             margin: auto;
         }
 
         .banner {
-            background-color: #81C784;
-            color: rgb(255, 255, 255);
-            padding: 60px 20px;
+            background: linear-gradient(135deg, #81C784 0%, #A5D6A7 100%);
+            color: white;
+            padding: 80px 20px;
             text-align: center;
+            border-radius: 15px;
+            margin: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .banner p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .banner::before {
+            content: '♻️';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3em;
+            opacity: 0.3;
         }
 
         .cards {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 30px;
             justify-content: center;
+            margin-top: 40px;
         }
 
         .card {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            width: 280px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            width: 300px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+
+        .card h3 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+        }
+
+        .card::before {
+            content: '';
+            font-size: 2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .card.contaminacao::before {
+            content: '🌱';
+        }
+
+        .card.agua::before {
+            content: '💧';
+        }
+
+        .card.ar::before {
+            content: '🌬️';
+        }
+
+        .card.ouro::before {
+            content: '💰';
+        }
+
+        .card.bateria::before {
+            content: '🔋';
+        }
+
+        .card.reutilizar::before {
+            content: '♻️';
         }
 
         .mapa {
-            background: #ddd;
+            background: white;
             padding: 40px;
             text-align: center;
-            border-radius: 8px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .mapa input {
+            padding: 10px;
+            width: 250px;
+            border: 2px solid #81C784;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .mapa #sugestoes {
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
         }
 
         .btn {
             display: inline-block;
-            padding: 10px 20px;
-            background-color: #2E7D32;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #2E7D32 0%, #388E3C 100%);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 25px;
             margin-top: 15px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
         }
 
         .btn:hover {
-            background-color: #1B5E20;
+            background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);
+            transform: scale(1.05);
         }
 
         footer {
-            background-color: #2E7D32;
+            background: linear-gradient(135deg, #2E7D32 0%, #388E3C 100%);
             color: white;
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+            padding: 30px;
+            margin-top: 60px;
+            box-shadow: 0 -4px 8px rgba(0,0,0,0.2);
         }
 
         @media (max-width: 768px) {
@@ -98,13 +231,25 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            .card {
+                width: 90%;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .banner h2 {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>E-Project</h1>
+    <h1>C-Project</h1>
 </header>
 
 <nav>
@@ -122,17 +267,17 @@
 </section>
 
 <section id="impacto">
-    <h2>📊 Impacto Ambiental</h2>
+    <h2><i class="fas fa-leaf"></i> Impacto Ambiental</h2>
     <div class="cards">
-        <div class="card">
+        <div class="card contaminacao">
             <h3>Contaminação do Solo</h3>
             <p>Metais pesados como chumbo e mercúrio contaminam a terra quando descartados incorretamente.</p>
         </div>
-        <div class="card">
+        <div class="card agua">
             <h3>Poluição da Água</h3>
             <p>Substâncias tóxicas podem atingir rios e lençóis freáticos.</p>
         </div>
-        <div class="card">
+        <div class="card ar">
             <h3>Poluição do Ar</h3>
             <p>A queima irregular de eletrônicos libera gases prejudiciais à saúde.</p>
         </div>
@@ -140,7 +285,7 @@
 </section>
 
 <section id="coleta">
-    <h2>Pontos de Coleta</h2>
+    <h2><i class="fas fa-map-marker-alt"></i> Pontos de Coleta</h2>
     <div class="mapa">
         <input id="cidade" type="text" placeholder="Digite sua cidade">
     <div id="sugestoes"></div>
@@ -161,7 +306,7 @@
 </section>
 
 <section id="descarte">
-    <h2>Como Descartar Corretamente</h2>
+    <h2><i class="fas fa-recycle"></i> Como Descartar Corretamente</h2>
     <ul>
         <li>Apague seus dados pessoais restaurando o aparelho.</li>
         <li>Separe celulares, computadores e baterias.</li>
@@ -171,15 +316,15 @@
 </section>
 
 <section id="curiosidades">
-    <h2>Curiosidades sobre Reciclagem</h2>
+    <h2><i class="fas fa-lightbulb"></i> Curiosidades sobre Reciclagem</h2>
     <div class="cards">
-        <div class="card">
+        <div class="card ouro">
             <p>Um celular pode conter ouro e prata recicláveis.</p>
         </div>
-        <div class="card">
+        <div class="card bateria">
             <p>Baterias podem levar centenas de anos para se decompor.</p>
         </div>
-        <div class="card">
+        <div class="card reutilizar">
             <p>Muitos componentes podem ser reutilizados.</p>
         </div>
     </div>
