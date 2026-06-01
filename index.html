@@ -1,397 +1,341 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C-Project</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
-            color: #333;
-            line-height: 1.6;
-        }
 
-        header {
-            background: linear-gradient(135deg, #2E7D32 0%, #388E3C 100%);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            position: relative;
-        }
+<meta charset="UTF-8">
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>') no-repeat center;
-            background-size: cover;
-            opacity: 0.1;
-        }
+<title>C-PROJECT 2.0</title>
 
-        nav {
-            background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+<link rel="stylesheet" href="estilo.css">
 
-        nav a {
-            color: white;
-            margin: 0 20px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
-            position: relative;
-        }
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
 
-        nav a:hover {
-            color: #BBDEFB;
-        }
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            background-color: #BBDEFB;
-            transition: all 0.3s ease;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-            left: 0;
-        }
-
-        section {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .banner {
-            background: linear-gradient(135deg, #81C784 0%, #A5D6A7 100%);
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-            border-radius: 15px;
-            margin: 20px auto;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .banner h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .banner p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
-
-        .banner::before {
-            content: '♻️';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 3em;
-            opacity: 0.3;
-        }
-
-        .cards {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            margin-top: 40px;
-        }
-
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            width: 300px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-            position: relative;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
-        }
-
-        .card h3 {
-            color: #2E7D32;
-            margin-bottom: 15px;
-        }
-
-        .card::before {
-            content: '';
-            font-size: 2em;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .card.contaminacao::before {
-            content: '🌱';
-        }
-
-        .card.agua::before {
-            content: '💧';
-        }
-
-        .card.ar::before {
-            content: '🌬️';
-        }
-
-        .card.ouro::before {
-            content: '💰';
-        }
-
-        .card.bateria::before {
-            content: '🔋';
-        }
-
-        .card.reutilizar::before {
-            content: '♻️';
-        }
-
-        .mapa {
-            background: white;
-            padding: 40px;
-            text-align: center;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-
-        .mapa input {
-            padding: 10px;
-            width: 250px;
-            border: 2px solid #81C784;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .mapa #sugestoes {
-            max-height: 150px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: white;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #2E7D32 0%, #388E3C 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            margin-top: 15px;
-            transition: background 0.3s ease, transform 0.3s ease;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);
-            transform: scale(1.05);
-        }
-
-        footer {
-            background: linear-gradient(135deg, #2E7D32 0%, #388E3C 100%);
-            color: white;
-            text-align: center;
-            padding: 30px;
-            margin-top: 60px;
-            box-shadow: 0 -4px 8px rgba(0,0,0,0.2);
-        }
-
-        @media (max-width: 768px) {
-            .cards {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .card {
-                width: 90%;
-            }
-
-            header h1 {
-                font-size: 2em;
-            }
-
-            .banner h2 {
-                font-size: 2em;
-            }
-        }
-    </style>
 </head>
+
 <body>
 
-<header>
-    <h1>C-Project</h1>
-</header>
+<div id="loading-screen">
 
-<nav>
-    <a href="#impacto">Impacto Ambiental</a>
-    <a href="#coleta">Pontos de Coleta</a>
-    <a href="#descarte">Como Descartar</a>
-    <a href="#curiosidades">Curiosidades</a>
-    <a href="#contato">Contato</a>
+<h1>C-PROJECT 2.0</h1>
+
+<p>Carregando sistema...</p>
+
+</div>
+
+<header>
+
+<nav class="navbar">
+
+<div class="logo">
+
+<i class="fas fa-recycle"></i>
+
+<span>C-PROJECT</span>
+
+</div>
+
+<ul class="menu">
+
+<li><a href="#inicio">Início</a></li>
+
+<li><a href="#impacto">Impactos</a></li>
+
+<li><a href="#mapa-section">Mapa</a></li>
+
+<li><a href="#dashboard">Dashboard</a></li>
+
+<li><a href="#favoritos-section">Favoritos</a></li>
+
+</ul>
+
+<div class="nav-buttons">
+
+<button id="darkToggle">
+
+<i class="fas fa-moon"></i>
+
+</button>
+
+<button id="menuMobile">
+
+<i class="fas fa-bars"></i>
+
+</button>
+
+</div>
+
 </nav>
 
-<section class="banner">
-    <h2>O lixo eletrônico cresce a cada ano.</h2>
-    <p>Você sabe para onde vai o seu?</p>
-    <a href="#coleta" class="btn">Encontrar ponto de coleta</a>
+</header>
+
+<section id="inicio" class="hero">
+
+<div class="hero-content">
+
+<h1>
+
+Conscientização sobre
+
+<span>Lixo Eletrônico</span>
+
+</h1>
+
+<p>
+
+Tecnologia aplicada à sustentabilidade.
+
+Encontre ecopontos, visualize locais próximos
+e descarte corretamente seus resíduos eletrônicos.
+
+</p>
+
+<div class="hero-buttons">
+
+<button id="usarLocalizacao">
+
+<i class="fas fa-location-arrow"></i>
+
+Usar minha localização
+
+</button>
+
+<a href="#mapa-section">
+
+<button>
+
+Encontrar Ecopontos
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
 </section>
 
 <section id="impacto">
-    <h2><i class="fas fa-leaf"></i> Impacto Ambiental</h2>
-    <div class="cards">
-        <div class="card contaminacao">
-            <h3>Contaminação do Solo</h3>
-            <p>Metais pesados como chumbo e mercúrio contaminam a terra quando descartados incorretamente.</p>
-        </div>
-        <div class="card agua">
-            <h3>Poluição da Água</h3>
-            <p>Substâncias tóxicas podem atingir rios e lençóis freáticos.</p>
-        </div>
-        <div class="card ar">
-            <h3>Poluição do Ar</h3>
-            <p>A queima irregular de eletrônicos libera gases prejudiciais à saúde.</p>
-        </div>
-    </div>
+
+<h2>Impactos Ambientais</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<i class="fas fa-seedling"></i>
+
+<h3>Solo</h3>
+
+<p>
+
+Metais pesados contaminam o solo
+e prejudicam o meio ambiente.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-water"></i>
+
+<h3>Água</h3>
+
+<p>
+
+Componentes tóxicos podem atingir
+rios, lagos e lençóis freáticos.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-smog"></i>
+
+<h3>Ar</h3>
+
+<p>
+
+A queima incorreta libera
+substâncias prejudiciais.
+
+</p>
+
+</div>
+
+</div>
+
 </section>
 
-<section id="coleta">
-    <h2><i class="fas fa-map-marker-alt"></i> Pontos de Coleta</h2>
-    <div class="mapa">
-        <input id="cidade" type="text" placeholder="Digite sua cidade">
-    <div id="sugestoes"></div>
+<section id="mapa-section">
 
-<br><br>
+<h2>Mapa Inteligente de Coleta</h2>
 
-<button class="btn" onclick="buscarCidade()">Buscar</button>
+<div class="busca-box">
 
-<br><br>
+<input
+type="text"
+id="cidade"
+placeholder="Digite sua cidade..."
+>
 
-<iframe 
-    id="mapa"
-        src="https://www.google.com/maps?q=reciclagem+eletronicos+sorocaba&output=embed"
-        width="100%" 
-        height="450" 
-        style="border:0;">
-</iframe>
+<div id="sugestoes"></div>
+
+<div class="buttons">
+
+<button id="buscarBtn">
+
+Buscar Cidade
+
+</button>
+
+<button id="favoritoBtn">
+
+Salvar Favorito
+
+</button>
+
+</div>
+
+</div>
+
+<div class="historico-box">
+
+<h3>Histórico</h3>
+
+<ul id="historicoLista"></ul>
+
+</div>
+
+<div class="map-layout">
+
+<div id="mapa"></div>
+
+<div class="ecopontos-box">
+
+<h3>Ecopontos Encontrados</h3>
+
+<ul id="listaEcopontos"></ul>
+
+</div>
+
+</div>
+
 </section>
 
-<section id="descarte">
-    <h2><i class="fas fa-recycle"></i> Como Descartar Corretamente</h2>
-    <ul>
-        <li>Apague seus dados pessoais restaurando o aparelho.</li>
-        <li>Separe celulares, computadores e baterias.</li>
-        <li>Leve a um ponto de coleta autorizado.</li>
-        <li><strong>Não jogue no lixo comum.</strong></li>
-    </ul>
+<section id="dashboard">
+
+<h2>Dashboard Ambiental</h2>
+
+<div class="dashboard-grid">
+
+<div class="dash-card">
+
+<h3>62 Milhões</h3>
+
+<p>
+
+Toneladas de lixo eletrônico
+geradas por ano.
+
+</p>
+
+</div>
+
+<div class="dash-card">
+
+<h3>17%</h3>
+
+<p>
+
+Taxa aproximada de
+reciclagem global.
+
+</p>
+
+</div>
+
+<div class="dash-card">
+
+<h3>Ouro Reciclável</h3>
+
+<p>
+
+Celulares possuem metais
+que podem ser reutilizados.
+
+</p>
+
+</div>
+
+</div>
+
 </section>
 
-<section id="curiosidades">
-    <h2><i class="fas fa-lightbulb"></i> Curiosidades sobre Reciclagem</h2>
-    <div class="cards">
-        <div class="card ouro">
-            <p>Um celular pode conter ouro e prata recicláveis.</p>
-        </div>
-        <div class="card bateria">
-            <p>Baterias podem levar centenas de anos para se decompor.</p>
-        </div>
-        <div class="card reutilizar">
-            <p>Muitos componentes podem ser reutilizados.</p>
-        </div>
-    </div>
+<section id="favoritos-section">
+
+<h2>Favoritos</h2>
+
+<ul id="favoritosLista"></ul>
+
 </section>
 
 <footer>
-    <p>© 2026 Anhanguera | Projeto Educacional sobre Lixo Eletrônico</p>
+
+<div class="footer-content">
+
+<h3>C-PROJECT 2.0</h3>
+
+<p>
+
+Projeto educacional de conscientização
+sobre descarte eletrônico.
+
+</p>
+
+<div class="footer-icons">
+
+<a href="#">
+
+<i class="fab fa-github"></i>
+
+</a>
+
+<a href="https://github.com/dudumilan">
+
+
+</a>
+
+<a href="https://www.linkedin.com/in/carlos-eduardo-milan-ferreira-bb8587249/">
+
+<i class="fas fa-envelope"></i>
+
+</a>
+
+</div>
+
 </footer>
-<script>
 
-let cidades = [];
-
-fetch("https://servicodados.ibge.gov.br/api/v1/localidades/municipios")
-.then(res => res.json())
-.then(data => {
-
-    cidades = data.map(cidade => cidade.nome);
-
-});
-
-
-
-document.getElementById("cidade").addEventListener("input", function() {
-
-    let texto = this.value.toLowerCase();
-
-    let resultados = cidades.filter(function(cidade){
-        return cidade.toLowerCase().startsWith(texto);
-    });
-
-    let lista = document.getElementById("sugestoes");
-
-    lista.innerHTML = "";
-
-    resultados.slice(0,10).forEach(function(cidade){
-
-        let item = document.createElement("div");
-
-        item.textContent = cidade;
-
-        item.style.cursor = "pointer";
-        item.style.padding = "5px";
-        item.style.background = "#fff";
-        item.style.borderBottom = "1px solid #ccc";
-
-        item.onclick = function(){
-            document.getElementById("cidade").value = cidade;
-            lista.innerHTML = "";
-        };
-
-        lista.appendChild(item);
-
-    });
-
-});
-
-
-function buscarCidade() {
-
-    let cidade = document.getElementById("cidade").value;
-
-    let url = "https://www.google.com/maps?q=reciclagem+eletronicos+descarte+eletronicos+ecoponto+" + cidade + "&output=embed";
-
-    document.getElementById("mapa").src = url;
-
-}
-
+<script
+src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
 </script>
+
+<script src="js.js"></script>
+
 </body>
+
 </html>
